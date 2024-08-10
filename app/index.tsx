@@ -1,5 +1,6 @@
 import ItemFlatList from "@/components/ItemList";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Link } from "expo-router";
+import { Button, Pressable, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -16,7 +17,11 @@ export default function Index() {
       <Text style={style.subtitle}>Gastos recientes</Text>
       <ItemFlatList />
 
-      <Button title="add" />
+      <Link href="/add" asChild>
+        <Pressable>
+          <Text>add</Text>
+        </Pressable>
+      </Link>
     </SafeAreaView>
   );
 }
