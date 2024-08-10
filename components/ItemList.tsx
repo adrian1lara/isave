@@ -1,4 +1,5 @@
-import { View, Text, FlatList } from "react-native";
+import React from "react";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 
 type ItemsProps = {
   title: string;
@@ -34,19 +35,26 @@ const DATA = [
   },
 ];
 
-const Item = ({ title, description, price }: ItemsProps) => (
-  <View>
-    <Text>{title}</Text>
-    <Text>{description}</Text>
-    <Text>{price}</Text>
-  </View>
-);
+const Item = ({ title, description, price }: ItemsProps) => {
+  return (
+    <View style={style.itemContainer}>
+      <View>
+        <Text style={style.titleText}>{title}</Text>
+        <Text style={style.descripText}>{description}</Text>
+      </View>
+      <View>
+        <Text style={style.priceText}>$ {price}</Text>
+      </View>
+    </View>
+  );
+};
 
 // component to render item in a FlatList
-const ItemFlatList = () => {
+export default function ItemFlatList() {
   return (
     <FlatList
       data={DATA}
+      style={style.flatlistContainer}
       renderItem={({ item }) => (
         <Item
           title={item.title}
@@ -56,6 +64,29 @@ const ItemFlatList = () => {
       )}
     />
   );
-};
+}
 
-export default ItemFlatList;
+const style = StyleSheet.create({
+  flatlistContainer: {},
+
+  itemContainer: {
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
+  },
+
+  priceText: {
+    fontSize: 25,
+  },
+
+  titleText: {
+    fontSize: 20,
+  },
+
+  descripText: {
+    fontSize: 12,
+  },
+});
